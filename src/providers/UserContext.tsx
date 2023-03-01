@@ -1,61 +1,34 @@
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
+import { IUserContext, IDefaultProvidersProps, IUser, IUserRegisterFormValues, IUserLoginFormValues } from './@types';
 
-export const UserContext = createContext({});
 
-interface IDefaultProvidersProps {
-  children: React.ReactNode;
-}
-
-interface IUser {
-  id: number;
-  name: string;
-  email: string;
-}
-
-interface IUserRegisterFormValues {
-  email: string;
-  password: string;
-  name: string;
-}
-
-interface IUserLoginFormValues {
-  email: string;
-  password: string;
-}
-
-interface IUserContext {
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  user: IUser | null;
-  userRegister: (formData: IUserRegisterFormValues) => Promise<void>;
-  userLogin: (formData: IUserLoginFormValues) => Promise<void>;
-  userLogout: () => void;
-}
+export const UserContext = createContext({} as IUserContext);
 
 export const UserProvider = ({ children }: IDefaultProvidersProps) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const navigate = useNavigate();
+  
+  const userAutoLoad = async () => {
+    const token = localStorage.getItem('@TOKEN');
+    try {
+      const response = await api.get('/products', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data);
+      navigate('/dashboard');
+    } catch (error) {
+      console.log(error);
+      localStorage.removeItem('@TOKEN');
+      navigate("/")
+    }
+  };
 
   useEffect(() => {
-    const userAutoLoad = async () => {
-      const token = localStorage.getItem('@TOKEN');
-      try {
-        const response = await api.get('/products', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUser(response.data);
-        navigate('/dashboard');
-      } catch (error) {
-        console.log(error);
-        localStorage.removeItem('@TOKEN');
-      }
-    };
-
     userAutoLoad();
   }, []);
 
@@ -66,7 +39,7 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
       setUser(response.data.user);
       localStorage.setItem('@TOKEN', response.data.accessToken);
       console.log(response);
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       console.log(error);
     } finally {
@@ -80,6 +53,7 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
       const response = await api.post('/login', formData);
       navigate('/dashboard');
       console.log(response);
+      localStorage.setItem('@TOKEN', response.data.accessToken);
     } catch (error) {
       console.log(error);
     } finally {
