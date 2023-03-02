@@ -8,7 +8,7 @@ import { HomeContext } from '../../../providers/HomeContext';
 
 const CartProductList = () => {
 
-  const { fullValue } = useContext(HomeContext);
+  const { fullValue, delAllCart } = useContext(HomeContext);
 
   return (
     <StyledCartProductList>
@@ -22,7 +22,7 @@ const CartProductList = () => {
         </StyledParagraph>
         <StyledParagraph className='total'>R$ {fullValue}</StyledParagraph>
       </div>
-      <StyledButton $buttonSize='default' $buttonStyle='gray'>
+      <StyledButton $buttonSize='default' $buttonStyle='gray' onClick={()=> delAllCart()}>
         Remover todos
       </StyledButton>
     </StyledCartProductList>

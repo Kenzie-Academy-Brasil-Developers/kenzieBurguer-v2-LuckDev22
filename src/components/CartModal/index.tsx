@@ -6,8 +6,7 @@ import { useContext } from 'react';
 import { HomeContext } from '../../providers/HomeContext';
 
 const CartModal = () => {
-
-  const { setCartModal } = useContext(HomeContext);
+  const { setCartModal, currentSale } = useContext(HomeContext);
 
   return (
     <StyledCartModalBox>
@@ -25,14 +24,18 @@ const CartModal = () => {
           </button>
         </header>
         <div className='cartBox'>
-          <CartProductList />
-
-          <div className='emptyBox'>
-            <StyledTitle tag='h3' $fontSize='three' textAlign='center'>
-              Sua sacola está vazia
-            </StyledTitle>
-            <StyledParagraph textAlign='center'>Adicione itens</StyledParagraph>
-          </div>
+          {currentSale.length > 0 ? (
+            <CartProductList />
+          ) : (
+            <div className='emptyBox'>
+              <StyledTitle tag='h3' $fontSize='three' textAlign='center'>
+                Sua sacola está vazia
+              </StyledTitle>
+              <StyledParagraph textAlign='center'>
+                Adicione itens
+              </StyledParagraph>
+            </div>
+          )}
         </div>
       </dialog>
     </StyledCartModalBox>

@@ -21,6 +21,7 @@ interface IHomeContext {
   delItenCart: (itemId: number) => void;
   currentSale: IProducts[];
   fullValue: number;
+  delAllCart: () => void;
 }
 
 export const HomeContext = createContext({} as IHomeContext);
@@ -72,6 +73,15 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
       return (newValue.price) + valueInitial;
     }, 0);
 
+
+    const delAllCart = () => {
+      if (currentSale.length > 0) {
+        
+        setCurrentSale([]);
+      }
+    };
+  
+
   return (
     <HomeContext.Provider
       value={{
@@ -84,7 +94,8 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
         addItenCart,
         delItenCart,
         currentSale,
-        fullValue
+        fullValue,
+        delAllCart
       }}
     >
       {children}
