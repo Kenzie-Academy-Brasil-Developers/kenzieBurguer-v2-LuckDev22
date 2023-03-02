@@ -1,7 +1,9 @@
 import { MdDelete } from 'react-icons/md';
-
 import { StyledCartProductCard } from './style';
 import { StyledTitle } from '../../../../styles/typography';
+
+
+
 
 const CartProductCard = () => (
   <StyledCartProductCard>

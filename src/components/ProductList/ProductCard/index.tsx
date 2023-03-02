@@ -3,6 +3,7 @@ import { StyledButton } from '../../../styles/button';
 import { StyledParagraph, StyledTitle } from '../../../styles/typography';
 
 const ProductCard = () => (
+  
   <StyledProductCard>
     <div className='imageBox'>
       <img src='https://i.imgur.com/Vng6VzV.png' alt='Hamburguer' />

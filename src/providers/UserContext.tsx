@@ -1,8 +1,13 @@
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
-import { IUserContext, IDefaultProvidersProps, IUser, IUserRegisterFormValues, IUserLoginFormValues } from './@types';
-
+import {
+  IUserContext,
+  IDefaultProvidersProps,
+  IUser,
+  IUserRegisterFormValues,
+  IUserLoginFormValues,
+} from './@types';
 
 export const UserContext = createContext({} as IUserContext);
 
@@ -10,21 +15,23 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
   const navigate = useNavigate();
-  
+
   const userAutoLoad = async () => {
     const token = localStorage.getItem('@TOKEN');
-    try {
-      const response = await api.get('/products', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data);
-      navigate('/dashboard');
-    } catch (error) {
-      console.log(error);
-      localStorage.removeItem('@TOKEN');
-      navigate("/")
+    if (token) {
+      try {
+        const response = await api.get('/products', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUser(response.data);
+        navigate('/dashboard');
+      } catch (error) {
+        console.log(error);
+        localStorage.removeItem('@TOKEN');
+        navigate('/');
+      }
     }
   };
 

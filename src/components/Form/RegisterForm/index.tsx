@@ -11,6 +11,7 @@ const RegisterForm = () => {
     register,
     handleSubmit,
     formState: { errors }} = useForm<IUserRegisterFormValues>();
+    
     const { userRegister } = useContext(UserContext) 
 
     const submit: SubmitHandler<IUserRegisterFormValues>= (formData) => {

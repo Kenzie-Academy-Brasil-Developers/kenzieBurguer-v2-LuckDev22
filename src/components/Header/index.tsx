@@ -1,13 +1,18 @@
 import { MdShoppingCart, MdLogout } from 'react-icons/md';
-
 import SearchForm from './SearchForm';
 import { StyledHeader } from './style';
 import LogoKenzieBurguer from '../../assets/LogoKenzieBurguer.svg';
-
 import { StyledContainer } from '../../styles/grid';
+import { useContext } from 'react';
+import { UserContext } from '../../providers/UserContext';
 
-const Header = () => (
-  <StyledHeader>
+
+const Header = () => {
+
+  const { userLogout } = useContext(UserContext) 
+
+  return (
+<StyledHeader>
     <StyledContainer containerWidth={1300}>
       <div className='flexGrid'>
         <img
@@ -24,16 +29,19 @@ const Header = () => (
                 console.log('Criar lógica');
               }}
             >
-              <MdShoppingCart size={28} />
+            <MdShoppingCart size={28} />
             </button>
-            <button type='button'>
-              <MdLogout size={28} />
+            <button onClick={() => userLogout() }type='button'>
+            <MdLogout size={28} />
             </button>
           </div>
         </nav>
       </div>
     </StyledContainer>
   </StyledHeader>
-);
+  )
+  
+}
+
 
 export default Header;
