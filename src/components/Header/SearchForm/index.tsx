@@ -4,15 +4,16 @@ import { StyledButton } from '../../../styles/button';
 import { useContext } from 'react';
 import { HomeContext } from '../../../providers/HomeContext';
 
-const { filterProduct } = useContext(HomeContext);
+const SearchForm = () => {
+  
+  const { filterProduct, setFilterCard } = useContext(HomeContext);
 
-const SearchForm = () => (
   <StyledSearchForm>
     <input type='text' placeholder='Digitar pesquisa' />
     <StyledButton type='submit' $buttonSize='medium' $buttonStyle='green'>
       <MdSearch />
     </StyledButton>
-  </StyledSearchForm>
-);
+  </StyledSearchForm>;
+};
 
 export default SearchForm;

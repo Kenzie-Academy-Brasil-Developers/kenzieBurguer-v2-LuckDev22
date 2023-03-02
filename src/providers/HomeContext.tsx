@@ -16,6 +16,9 @@ interface IHomeContext {
   cartModal: boolean;
   setCartModal: React.Dispatch<React.SetStateAction<boolean>>;
   filterProduct: IProducts[];
+  setFilterCard: React.Dispatch<React.SetStateAction<string>>;
+  addItenCart: (product: IProducts) => void;
+  delItenCart: (itemId: number) => void;
 }
 
 export const HomeContext = createContext({} as IHomeContext);
@@ -23,7 +26,7 @@ export const HomeContext = createContext({} as IHomeContext);
 export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
   const [products, setProducts] = useState<IProducts[]>([]);
   const [filterCard, setFilterCard] = useState('');
-  const [currentSale, setCurrentSale] = useState();
+  const [currentSale, setCurrentSale] = useState<IProducts[]>([]);
   const [cartModal, setCartModal] = useState(false);
 
   useEffect(() => {
@@ -50,22 +53,22 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
       product.category.toLowerCase().startsWith(filterCard)
   );
 
-  // const addItenCart = (product) => {
-  //   if (!currentSale.some((productToCart) => productToCart.id === product.id)) {
-  //     setCurrentSale([...currentSale, product]);
-  //   } else {
-  //     console.log("error")
-  //   }
-  // };
+  const addItenCart = (product: IProducts) => {
+    if (!currentSale.some((productToCart) => productToCart.id === product.id)) {
+      setCurrentSale([...currentSale, product]);
+    } else {
+      console.log("error")
+    }
+  };
 
-  // const delItenCart = (itemId) => {
-  //   const newItem = currentSale.filter((item) => item.id !== itemId);
-  //   setCurrentSale(newItem);
-  // };
+  const delItenCart = (itemId:number) => {
+    const newItem = currentSale.filter((item) => item.id !== itemId);
+    setCurrentSale(newItem);
+  };
 
   return (
     <HomeContext.Provider
-      value={{ products, setProducts, cartModal, setCartModal, filterProduct }}
+      value={{ products, setProducts, cartModal, setCartModal, filterProduct, setFilterCard, addItenCart, delItenCart }}
     >
       {children}
     </HomeContext.Provider>
