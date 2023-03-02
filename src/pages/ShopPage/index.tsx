@@ -6,13 +6,14 @@ import { StyledContainer } from '../../styles/grid';
 import { useContext } from 'react';
 import { HomeContext } from '../../providers/HomeContext';
 
+
 const ShopPage = () => {
-  
-  const { getProducts } = useContext(HomeContext);
+  const { setCartModal, cartModal } = useContext(HomeContext);
 
   return (
+  
     <StyledShopPage>
-      <CartModal />
+     {cartModal && <CartModal />} 
       <Header />
       <main>
         <StyledContainer containerWidth={1300}>
@@ -20,7 +21,8 @@ const ShopPage = () => {
         </StyledContainer>
       </main>
     </StyledShopPage>
-  );
-};
+  
+  )
+}
 
 export default ShopPage;

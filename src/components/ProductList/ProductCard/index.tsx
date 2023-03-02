@@ -1,24 +1,37 @@
 import { StyledProductCard } from './style';
 import { StyledButton } from '../../../styles/button';
 import { StyledParagraph, StyledTitle } from '../../../styles/typography';
+import { useContext } from 'react';
+import { HomeContext } from '../../../providers/HomeContext';
 
-const ProductCard = () => (
-  
-  <StyledProductCard>
-    <div className='imageBox'>
-      <img src='https://i.imgur.com/Vng6VzV.png' alt='Hamburguer' />
-    </div>
-    <div className='content'>
-      <StyledTitle tag='h3' $fontSize='three'>
-        Hamburguer
-      </StyledTitle>
-      <StyledParagraph className='category'>Sanduíches</StyledParagraph>
-      <StyledParagraph className='price'>R$ 14,00</StyledParagraph>
-      <StyledButton $buttonSize='medium' $buttonStyle='green'>
-        Adicionar
-      </StyledButton>
-    </div>
-  </StyledProductCard>
-);
+const ProductCard = () => {
+  const { products } = useContext(HomeContext);
+
+  return (
+    <>
+      {products.map((card,) => (
+        
+        <StyledProductCard key={card.id}>
+          <div className='imageBox' >
+            <img src={card.img} alt={card.name} />
+          </div>
+          <div className='content'>
+            <StyledTitle tag='h3' $fontSize='three'>
+              {card.name}
+            </StyledTitle>
+            <StyledParagraph className='category'>
+              {card.category}
+            </StyledParagraph>
+            <StyledParagraph className='price'>{card.price}</StyledParagraph>
+            <StyledButton $buttonSize='medium' $buttonStyle='green'>
+              Adicionar
+            </StyledButton>
+          </div>
+        </StyledProductCard>
+        
+      ))}
+    </>   
+  );
+};
 
 export default ProductCard;

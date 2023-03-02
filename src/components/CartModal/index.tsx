@@ -6,7 +6,8 @@ import { useContext } from 'react';
 import { HomeContext } from '../../providers/HomeContext';
 
 const CartModal = () => {
-  const { cartModal, setCartModal } = useContext(HomeContext);
+
+  const { setCartModal } = useContext(HomeContext);
 
   return (
     <StyledCartModalBox>

@@ -1,6 +1,10 @@
 import { MdSearch } from 'react-icons/md';
 import { StyledSearchForm } from './style';
 import { StyledButton } from '../../../styles/button';
+import { useContext } from 'react';
+import { HomeContext } from '../../../providers/HomeContext';
+
+const { filterProduct } = useContext(HomeContext);
 
 const SearchForm = () => (
   <StyledSearchForm>
