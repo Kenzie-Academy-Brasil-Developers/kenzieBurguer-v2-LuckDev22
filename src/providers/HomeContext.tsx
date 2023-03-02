@@ -19,6 +19,8 @@ interface IHomeContext {
   setFilterCard: React.Dispatch<React.SetStateAction<string>>;
   addItenCart: (product: IProducts) => void;
   delItenCart: (itemId: number) => void;
+  currentSale: IProducts[];
+  fullValue: number;
 }
 
 export const HomeContext = createContext({} as IHomeContext);
@@ -66,6 +68,10 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
     setCurrentSale(newItem);
   };
 
+      const fullValue = currentSale.reduce((valueInitial, newValue) => {
+      return (newValue.price) + valueInitial;
+    }, 0);
+
   return (
     <HomeContext.Provider
       value={{
@@ -77,6 +83,8 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
         setFilterCard,
         addItenCart,
         delItenCart,
+        currentSale,
+        fullValue
       }}
     >
       {children}

@@ -9,10 +9,9 @@ const ProductCard = () => {
 
   return (
     <>
-      {products.map((card,) => (
-        
+      {products.map((card) => (
         <StyledProductCard key={card.id}>
-          <div className='imageBox' >
+          <div className='imageBox'>
             <img src={card.img} alt={card.name} />
           </div>
           <div className='content'>
@@ -23,14 +22,17 @@ const ProductCard = () => {
               {card.category}
             </StyledParagraph>
             <StyledParagraph className='price'>{card.price}</StyledParagraph>
-            <StyledButton onClick={()=> addItenCart(card.id)} $buttonSize='medium' $buttonStyle='green'>
+            <StyledButton
+              onClick={() => addItenCart(card)}
+              $buttonSize='medium'
+              $buttonStyle='green'
+            >
               Adicionar
             </StyledButton>
           </div>
         </StyledProductCard>
-        
       ))}
-    </>   
+    </>
   );
 };
 
