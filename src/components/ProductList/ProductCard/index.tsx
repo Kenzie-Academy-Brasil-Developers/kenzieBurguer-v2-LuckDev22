@@ -5,11 +5,11 @@ import { useContext } from 'react';
 import { HomeContext } from '../../../providers/HomeContext';
 
 const ProductCard = () => {
-  const { products, addItenCart } = useContext(HomeContext);
+  const { products,filterProduct, addItenCart } = useContext(HomeContext);
 
   return (
     <>
-      {products.map((card) => (
+      {filterProduct.map((card) => (
         <StyledProductCard key={card.id}>
           <div className='imageBox'>
             <img src={card.img} alt={card.name} />

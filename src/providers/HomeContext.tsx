@@ -22,6 +22,7 @@ interface IHomeContext {
   currentSale: IProducts[];
   fullValue: number;
   delAllCart: () => void;
+  filterCard: string;
 }
 
 export const HomeContext = createContext({} as IHomeContext);
@@ -95,7 +96,8 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
         delItenCart,
         currentSale,
         fullValue,
-        delAllCart
+        delAllCart,
+        filterCard
       }}
     >
       {children}
