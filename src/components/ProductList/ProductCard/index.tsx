@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { HomeContext } from '../../../providers/HomeContext';
 
 const ProductCard = () => {
-  const { products } = useContext(HomeContext);
+  const { products, addItenCart } = useContext(HomeContext);
 
   return (
     <>
@@ -23,7 +23,7 @@ const ProductCard = () => {
               {card.category}
             </StyledParagraph>
             <StyledParagraph className='price'>{card.price}</StyledParagraph>
-            <StyledButton $buttonSize='medium' $buttonStyle='green'>
+            <StyledButton onClick={()=> addItenCart(card.id)} $buttonSize='medium' $buttonStyle='green'>
               Adicionar
             </StyledButton>
           </div>

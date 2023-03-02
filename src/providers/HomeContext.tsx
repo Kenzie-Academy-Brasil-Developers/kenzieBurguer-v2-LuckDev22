@@ -57,18 +57,27 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
     if (!currentSale.some((productToCart) => productToCart.id === product.id)) {
       setCurrentSale([...currentSale, product]);
     } else {
-      console.log("error")
+      console.log('error');
     }
   };
 
-  const delItenCart = (itemId:number) => {
+  const delItenCart = (itemId: number) => {
     const newItem = currentSale.filter((item) => item.id !== itemId);
     setCurrentSale(newItem);
   };
 
   return (
     <HomeContext.Provider
-      value={{ products, setProducts, cartModal, setCartModal, filterProduct, setFilterCard, addItenCart, delItenCart }}
+      value={{
+        products,
+        setProducts,
+        cartModal,
+        setCartModal,
+        filterProduct,
+        setFilterCard,
+        addItenCart,
+        delItenCart,
+      }}
     >
       {children}
     </HomeContext.Provider>
