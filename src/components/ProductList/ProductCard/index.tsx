@@ -21,7 +21,7 @@ const ProductCard = () => {
             <StyledParagraph className='category'>
               {card.category}
             </StyledParagraph>
-            <StyledParagraph className='price'>{card.price}</StyledParagraph>
+            <StyledParagraph className='price'>R$ {card.price}</StyledParagraph>
             <StyledButton
               onClick={() => addItenCart(card)}
               $buttonSize='medium'
