@@ -25,8 +25,7 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
           },
         });
         setProducts(response.data);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
     getProducts();
   }, []);
@@ -44,7 +43,7 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
   const addItenCart = (product: IProducts) => {
     if (!currentSale.some((productToCart) => productToCart.id === product.id)) {
       setCurrentSale([...currentSale, product]);
-      toast.success("Produto adicionado com sucesso!");
+      toast.success('Produto adicionado com sucesso!');
     } else {
       toast.error('Produto já adicionado!');
     }
@@ -53,7 +52,7 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
   const delItenCart = (itemId: number) => {
     const newItem = currentSale.filter((item) => item.id !== itemId);
     setCurrentSale(newItem);
-    toast.warn("Produto removido!");
+    toast.warn('Produto removido!');
   };
 
   const fullValue = currentSale.reduce((valueInitial, newValue) => {
@@ -62,7 +61,7 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
 
   const delAllCart = () => {
     if (currentSale.length > 0) {
-      toast.warn("Todos os produto removido!");
+      toast.warn('Todos os produto removido!');
       setCurrentSale([]);
     }
   };

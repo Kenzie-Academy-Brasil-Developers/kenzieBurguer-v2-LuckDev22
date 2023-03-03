@@ -34,6 +34,7 @@ export interface IProducts {
   category: string;
   price: number;
   img: string;
+  qty?: number;
 }
 
 export interface IHomeContext {

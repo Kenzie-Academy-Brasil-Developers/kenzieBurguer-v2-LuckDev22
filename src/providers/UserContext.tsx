@@ -17,12 +17,13 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem('@TOKEN');
+    const id = localStorage.getItem('@IDUSER');
     const userAutoLoad = async () => {
-      const token = localStorage.getItem('@TOKEN');
       if (token) {
         try {
           setLoading(true);
-          const response = await api.get('/products', {
+          const response = await api.get(`/users/${id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -30,10 +31,9 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
           setUser(response.data);
           navigate('/dashboard');
         } catch (error) {
-          console.log(error);
           localStorage.removeItem('@TOKEN');
           navigate('/');
-        } finally{
+        } finally {
           setLoading(false);
         }
       }
@@ -48,10 +48,8 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
       const response = await api.post('/users', formData);
       setUser(response.data.user);
       localStorage.setItem('@TOKEN', response.data.accessToken);
-      console.log(response);
       navigate('/');
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -63,10 +61,9 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
       const response = await api.post('/login', formData);
       navigate('/dashboard');
       localStorage.setItem('@TOKEN', response.data.accessToken);
+      localStorage.setItem('@IDUSER', response.data.user.id);
       setUser(response.data.user);
-      console.log(response);
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }

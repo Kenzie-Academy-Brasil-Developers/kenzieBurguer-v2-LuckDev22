@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { HomeContext } from '../../../../providers/HomeContext';
 
 const CartProductCard = () => {
-  const { currentSale } = useContext(HomeContext);
+  const { currentSale, delItenCart } = useContext(HomeContext);
 
   return (
     <>
@@ -18,7 +18,7 @@ const CartProductCard = () => {
             <StyledTitle tag='h3' $fontSize='three'>
               {itemCart.name}
             </StyledTitle>
-            <button type='button' aria-label='Remover'>
+            <button type='button' aria-label='Remover' onClick={()=> delItenCart(itemCart.id)}>
               <MdDelete size={24} />
             </button>
           </div>
