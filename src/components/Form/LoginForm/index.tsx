@@ -5,13 +5,17 @@ import { UserContext } from '../../../providers/UserContext';
 import { StyledButton } from '../../../styles/button';
 import { StyledForm } from '../../../styles/form';
 import Input from '../Input';
+import { loginSchema } from './loginSchema';
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const LoginForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IUserLoginFormValues>();
+  } = useForm<IUserLoginFormValues>({
+    resolver: yupResolver(loginSchema),
+  });
 
   const { userLogin } = useContext(UserContext);
 

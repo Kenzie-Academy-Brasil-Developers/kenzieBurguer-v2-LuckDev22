@@ -5,13 +5,17 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { IUserRegisterFormValues } from '../../../providers/@types';
 import { useContext } from 'react';
 import { UserContext } from '../../../providers/UserContext';
+import { registerSchema } from './registerSchema';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const RegisterForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IUserRegisterFormValues>();
+  } = useForm<IUserRegisterFormValues>({
+    resolver: yupResolver(registerSchema),
+  });
 
   const { userRegister } = useContext(UserContext);
 
