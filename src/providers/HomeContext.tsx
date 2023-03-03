@@ -16,21 +16,6 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
   );
 
   useEffect(() => {
-    const token = localStorage.getItem('@TOKEN');
-    const getProducts = async () => {
-      try {
-        const response = await api.get('/products', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setProducts(response.data);
-      } catch (error) {}
-    };
-    getProducts();
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem('@ItemCart', JSON.stringify(currentSale));
   }, [currentSale]);
 
@@ -58,7 +43,6 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
   const fullValue = currentSale.reduce((valueInitial, newValue) => {
     return newValue.price + valueInitial;
   }, 0);
-
 
   const delAllCart = () => {
     if (currentSale.length > 0) {

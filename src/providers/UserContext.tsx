@@ -12,6 +12,7 @@ import {
 
 export const UserContext = createContext({} as IUserContext);
 
+
 export const UserProvider = ({ children }: IDefaultProvidersProps) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
