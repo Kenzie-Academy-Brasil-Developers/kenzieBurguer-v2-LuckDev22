@@ -19,7 +19,7 @@ const CartProductList = () => {
         <StyledParagraph>
           <strong>Total</strong>
         </StyledParagraph>
-        <StyledParagraph className='total'>R$ {fullValue}</StyledParagraph>
+        <StyledParagraph className='total'>R$ {fullValue.toFixed(2)}</StyledParagraph>
       </div>
       <StyledButton
         $buttonSize='default'

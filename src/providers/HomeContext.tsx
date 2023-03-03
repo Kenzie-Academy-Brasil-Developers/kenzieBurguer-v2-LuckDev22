@@ -59,6 +59,7 @@ export const HomeProvider = ({ children }: IDefaultProvidersProps) => {
     return newValue.price + valueInitial;
   }, 0);
 
+
   const delAllCart = () => {
     if (currentSale.length > 0) {
       toast.warn('Todos os produto removido!');
