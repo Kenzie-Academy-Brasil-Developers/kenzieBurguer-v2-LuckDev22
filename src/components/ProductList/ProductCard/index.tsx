@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { HomeContext } from '../../../providers/HomeContext';
 
 const ProductCard = () => {
-  const { products,filterProduct, addItenCart } = useContext(HomeContext);
+  const { filterProduct, addItenCart } = useContext(HomeContext);
 
   return (
     <>

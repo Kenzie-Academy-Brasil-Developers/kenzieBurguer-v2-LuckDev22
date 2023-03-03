@@ -16,26 +16,29 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
   const [user, setUser] = useState<IUser | null>(null);
   const navigate = useNavigate();
 
-  const userAutoLoad = async () => {
-    const token = localStorage.getItem('@TOKEN');
-    if (token) {
-      try {
-        const response = await api.get('/products', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUser(response.data);
-        navigate('/dashboard');
-      } catch (error) {
-        console.log(error);
-        localStorage.removeItem('@TOKEN');
-        navigate('/');
-      }
-    }
-  };
-
   useEffect(() => {
+    const userAutoLoad = async () => {
+      const token = localStorage.getItem('@TOKEN');
+      if (token) {
+        try {
+          setLoading(true);
+          const response = await api.get('/products', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setUser(response.data);
+          navigate('/dashboard');
+        } catch (error) {
+          console.log(error);
+          localStorage.removeItem('@TOKEN');
+          navigate('/');
+        } finally{
+          setLoading(false);
+        }
+      }
+    };
+
     userAutoLoad();
   }, []);
 
@@ -59,8 +62,9 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
       setLoading(true);
       const response = await api.post('/login', formData);
       navigate('/dashboard');
-      console.log(response);
       localStorage.setItem('@TOKEN', response.data.accessToken);
+      setUser(response.data.user);
+      console.log(response);
     } catch (error) {
       console.log(error);
     } finally {

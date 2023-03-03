@@ -5,24 +5,33 @@ import ProductList from '../../components/ProductList';
 import { StyledContainer } from '../../styles/grid';
 import { useContext } from 'react';
 import { HomeContext } from '../../providers/HomeContext';
-
+import { UserContext } from '../../providers/UserContext';
 
 const ShopPage = () => {
-  const { setCartModal, cartModal } = useContext(HomeContext);
+  const { user, loading } = useContext(UserContext);
+
+  const { cartModal } = useContext(HomeContext);
+
+  
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
 
   return (
-  
-    <StyledShopPage>
-     {cartModal && <CartModal />} 
-      <Header />
-      <main>
-        <StyledContainer containerWidth={1300}>
-          <ProductList />
-        </StyledContainer>
-      </main>
-    </StyledShopPage>
-  
-  )
-}
+    <>
+      {user ? (
+        <StyledShopPage>
+          {cartModal && <CartModal />}
+          <Header />
+          <main>
+            <StyledContainer containerWidth={1300}>
+              <ProductList />
+            </StyledContainer>
+          </main>
+        </StyledShopPage>
+      ) : null}
+    </>
+  );
+};
 
 export default ShopPage;
