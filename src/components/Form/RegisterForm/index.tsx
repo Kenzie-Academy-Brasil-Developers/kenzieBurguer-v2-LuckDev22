@@ -47,7 +47,7 @@ const RegisterForm = () => {
         label='Confirmar Senha'
         type='password'
         error={errors.password}
-        register={register('password')}
+        register={register('confirmPassword')}
       />
       <StyledButton type='submit' $buttonSize='default' $buttonStyle='gray'>
         Cadastrar
