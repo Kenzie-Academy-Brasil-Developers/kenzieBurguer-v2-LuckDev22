@@ -10,7 +10,6 @@ import { api } from '../../services/api';
 
 const ShopPage = () => {
   const { user, loading, setLoading } = useContext(UserContext);
-
   const { cartModal, setProducts } = useContext(HomeContext);
 
   useEffect(() => {

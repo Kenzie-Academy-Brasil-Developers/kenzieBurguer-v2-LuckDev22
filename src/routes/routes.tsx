@@ -9,7 +9,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path='/' element={<LoginPage />} />
       <Route path='/register' element={<RegisterPage />} />
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<LoginPage />} />
       
       <Route path='/dashboard' element={<ProtectedRoutes />}>
         <Route index element={<ShopPage />} />

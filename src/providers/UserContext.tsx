@@ -14,7 +14,7 @@ export const UserContext = createContext({} as IUserContext);
 
 
 export const UserProvider = ({ children }: IDefaultProvidersProps) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<IUser | null>(null);
   const navigate = useNavigate();
 
@@ -24,21 +24,22 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
     const userAutoLoad = async () => {
       if (token) {
         try {
-          setLoading(true);
           const response = await api.get(`/users/${id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
           setUser(response.data);
-          navigate('/dashboard');
+         return navigate('/dashboard');
         } catch (error) {
+          console.log("teste")
           localStorage.removeItem('@TOKEN');
-          navigate('/');
+        return  navigate('/');
         } finally {
-          setLoading(false);
+        return setLoading(false);
         }
       }
+      navigate('/')
     };
 
     userAutoLoad();

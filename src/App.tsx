@@ -19,10 +19,10 @@ export const App = () => (
       theme='light'
     />
     <GlobalStyles />
-    <HomeProvider>
-      <UserProvider>
+    <UserProvider>
+      <HomeProvider>
         <AppRoutes />
-      </UserProvider>
-    </HomeProvider>
+      </HomeProvider>
+    </UserProvider>
   </>
 );
