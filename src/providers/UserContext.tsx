@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { api } from '../services/api';
 import {
   IUserContext,
@@ -48,8 +49,10 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
       const response = await api.post('/users', formData);
       setUser(response.data.user);
       localStorage.setItem('@TOKEN', response.data.accessToken);
+      toast.success(`Usuario ${response.data.user.name}, cadastrado com sucesso!` );
       navigate('/');
     } catch (error) {
+      toast.error('Usuario não cadastrado!');
     } finally {
       setLoading(false);
     }
@@ -63,7 +66,9 @@ export const UserProvider = ({ children }: IDefaultProvidersProps) => {
       localStorage.setItem('@TOKEN', response.data.accessToken);
       localStorage.setItem('@IDUSER', response.data.user.id);
       setUser(response.data.user);
+      toast.success(`${response.data.user.name}, Bem Vindo ! ` );
     } catch (error) {
+      toast.error('Usuario ou senha invalido!');
     } finally {
       setLoading(false);
     }
