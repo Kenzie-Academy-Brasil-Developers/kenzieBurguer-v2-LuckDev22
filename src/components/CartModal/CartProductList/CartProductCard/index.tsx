@@ -11,14 +11,18 @@ const CartProductCard = () => {
     <>
       {currentSale.map((itemCart) => (
         <StyledCartProductCard key={itemCart.id}>
-          <div className='imageBox' >
+          <div className='imageBox'>
             <img src={itemCart.img} alt={itemCart.name} />
           </div>
           <div className='contentBox'>
             <StyledTitle tag='h3' $fontSize='three'>
               {itemCart.name}
             </StyledTitle>
-            <button type='button' aria-label='Remover' onClick={()=> delItenCart(itemCart.id)}>
+            <button
+              type='button'
+              aria-label='Remover'
+              onClick={() => delItenCart(itemCart.id)}
+            >
               <MdDelete size={24} />
             </button>
           </div>

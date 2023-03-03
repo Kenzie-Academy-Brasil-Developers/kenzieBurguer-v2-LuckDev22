@@ -12,7 +12,6 @@ const ShopPage = () => {
 
   const { cartModal } = useContext(HomeContext);
 
-  
   if (loading) {
     return <p>Carregando...</p>;
   }

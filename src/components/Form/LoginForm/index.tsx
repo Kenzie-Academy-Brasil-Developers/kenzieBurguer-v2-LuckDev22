@@ -15,26 +15,25 @@ const LoginForm = () => {
 
   const { userLogin } = useContext(UserContext);
 
-
-  const submit: SubmitHandler<IUserLoginFormValues>= (formData) => {
+  const submit: SubmitHandler<IUserLoginFormValues> = (formData) => {
     userLogin(formData);
-  }
+  };
 
   return (
     <StyledForm onSubmit={handleSubmit(submit)}>
-       <Input
-        label="Email"
-        type="email"
+      <Input
+        label='Email'
+        type='email'
         error={errors.email}
-        register={register("email")}
+        register={register('email')}
       />
       <Input
-        label="Senha"
-        type="password"
+        label='Senha'
+        type='password'
         error={errors.password}
-        register={register("password")}
+        register={register('password')}
       />
-      <StyledButton type="submit" $buttonSize='default' $buttonStyle='green'>
+      <StyledButton type='submit' $buttonSize='default' $buttonStyle='green'>
         Entrar
       </StyledButton>
     </StyledForm>
